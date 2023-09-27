@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3335896656233940762}
   - component: {fileID: 3335896656233940740}
   - component: {fileID: 3335896656233940741}
-  - component: {fileID: 3335896656233940743}
   m_Layer: 0
   m_Name: Knight_Hero
   m_TagString: Player
@@ -65,25 +64,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &3335896656233940743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3335896656233940763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11bd3c8298d4d09439fcfc903f5594ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 3335896656233940741}
-  anim: {fileID: 5990546528584555273}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  speed: 10
-  jumpForce: 350
 --- !u!1001 &3335896656161432895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -145,11 +125,6 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 0ec9994be5e935546a27e8a1c66ec1f0, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
---- !u!95 &5990546528584555273 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 9036980633323257398, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
-  m_PrefabInstance: {fileID: 3335896656161432895}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6100137966924295763 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8855052669661678444, guid: 2dfbb63c9cdf7504faf4ff26b0581598, type: 3}
