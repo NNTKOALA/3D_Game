@@ -15,6 +15,8 @@ public class Player : Character
     private Rigidbody rb;
     private Vector3 moveVector = new Vector3();
 
+    private float horizontal;
+
     private bool isPressJump;
     private bool isPressAttack;
 
@@ -33,11 +35,7 @@ public class Player : Character
         rb = GetComponent<Rigidbody>();
         SetSavePoint(transform.position);
 
-/*        UIManager.Instance.onAttackButtonDown += UIManager_onAttackButtonDown;
-        UIManager.Instance.onJumpButtonDown += UIManager_onJumpButtonDown;
-        UIManager.Instance.onThrownButtonDown += UIManager_onThrowButtonDown;
-
-        coin = PlayerPrefs.GetInt(UIManager.COIN_KEY, 0);
+/*        coin = PlayerPrefs.GetInt(UIManager.COIN_KEY, 0);
         UIManager.Instance.SetCoinText(coin);*/
     }
 
@@ -64,7 +62,7 @@ public class Player : Character
     {
         if (isDead) return;
 
-        //moveVector.x = Input.GetAxisRaw("Horizontal");
+        horizontal = Input.GetAxisRaw("Horizontal");
         isGrounded = CheckOnGround();
 
         if (isGrounded)
@@ -72,15 +70,6 @@ public class Player : Character
             if (isAttack || isJumping)
             {
                 return;
-            }
-
-            if (moveVector != Vector3.zero)
-            {
-                Move(1f); // fully control when on the ground
-            }
-            else
-            {
-                Idle();
             }
 
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
@@ -108,6 +97,23 @@ public class Player : Character
                 isJumping = false;
             }
         }
+
+        //Moving
+        if (Mathf.Abs(horizontal) > 0.1f)
+        {
+            rb.velocity = new Vector3(horizontal * Time.fixedDeltaTime * moveSpeed, rb.velocity.y, 0);
+            transform.rotation = Quaternion.Euler(new Vector3(0, horizontal > 0 ? 90 : -90, 0));
+            isMoving = true;
+
+            //transform.localScale = new Vector3(horizontal, 1, 1);
+        }
+        else if (isGrounded)
+        {
+            isMoving = false;
+            rb.velocity = new Vector3(0, rb.velocity.y, 0);
+        }
+        anim.SetBool("isMoving", isMoving);
+        currentAnim = isMoving ? "move" : "idle";
     }
 
 
@@ -116,28 +122,6 @@ public class Player : Character
         rb.velocity = Vector3.zero;
         ChangeAnim("idle");
     }
-
-    private void Move(float controlFraction)
-    {
-        if (moveVector.x > 0)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-        rb.velocity = new Vector3(moveVector.x * moveSpeed * controlFraction, rb.velocity.y, 0f);
-
-        if (controlFraction < 1f)
-        {
-            return;
-        }
-        anim.SetBool("isMoving", isMoving);
-        currentAnim = isMoving ? "move" : "idle";
-    }
-
-
 
     private void Attack()
     {
