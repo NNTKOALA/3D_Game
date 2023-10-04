@@ -20,7 +20,7 @@ public class DropGround : MonoBehaviour
 
     private void Drop()
     {
-        collider.isTrigger = true;
+        rb.useGravity = true;
         isFalling = true;
         Invoke(nameof(OnReset), 3f);
     }
@@ -28,7 +28,6 @@ public class DropGround : MonoBehaviour
     private void OnReset()
     {
         transform.position = startPoint;
-        collider.isTrigger = false;
         isFalling = false;
     }
 

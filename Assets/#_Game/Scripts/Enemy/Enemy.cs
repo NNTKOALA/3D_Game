@@ -9,7 +9,7 @@ public class Enemy : Character
 {
     [SerializeField] float attackRange;
     [SerializeField] float moveSpeed;
-    [SerializeField] Rigidbody2D rb;
+    [SerializeField] Rigidbody rb;
     [SerializeField] GameObject attackArea;
 
     private IState currentState;
@@ -23,7 +23,7 @@ public class Enemy : Character
         {
             target = value;
 
-/*            if (IsTargetInRange())
+            if (IsTargetInRange())
             {
                 ChangeState(new AttackState());
             }
@@ -34,7 +34,7 @@ public class Enemy : Character
             else
             {
                 ChangeState(new IdleState());
-            }*/
+            }
         }
     }
 
@@ -42,7 +42,7 @@ public class Enemy : Character
     {
         if (currentState != null && !IsDeath)
         {
-            //currentState.OnExecute(this);
+            currentState.OnExecute(this);
         }
     }
 
@@ -50,7 +50,7 @@ public class Enemy : Character
     {
         base.OnInit();
 
-        //ChangeState(new IdleState());
+        ChangeState(new IdleState());
         isRight = true;
     }
 
@@ -78,7 +78,7 @@ public class Enemy : Character
     {
         ChangeAnim("idle");
 
-        rb.velocity = Vector2.zero;
+        rb.velocity = Vector3.zero;
     }
 
     public void Attack()
@@ -91,7 +91,7 @@ public class Enemy : Character
 
     public bool IsTargetInRange()
     {
-        if (target != null && Vector2.Distance(transform.position, target.transform.position) <= attackRange)
+        if (target != null && Vector3.Distance(transform.position, target.transform.position) <= attackRange)
             return true;
 
         return false;
@@ -101,17 +101,17 @@ public class Enemy : Character
     {
         if (currentState != null)
         {
-            //currentState.OnExit(this);
+            currentState.OnExit(this);
         }
 
         currentState = newState;
         if (currentState != null)
         {
-            //currentState.OnEnter(this);
+            currentState.OnEnter(this);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("EnemyWall"))
         {
