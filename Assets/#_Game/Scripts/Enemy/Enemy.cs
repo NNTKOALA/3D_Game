@@ -7,10 +7,10 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    [SerializeField] float attackRange;
+    //[SerializeField] float attackRange;
     [SerializeField] float moveSpeed;
     [SerializeField] Rigidbody rb;
-    [SerializeField] GameObject attackArea;
+    //[SerializeField] GameObject attackArea;
 
     private IState currentState;
     private bool isRight;
@@ -23,7 +23,7 @@ public class Enemy : Character
         {
             target = value;
 
-            if (IsTargetInRange())
+/*            if (IsTargetInRange())
             {
                 ChangeState(new AttackState());
             }
@@ -34,7 +34,7 @@ public class Enemy : Character
             else
             {
                 ChangeState(new IdleState());
-            }
+            }*/
         }
     }
 
@@ -89,13 +89,13 @@ public class Enemy : Character
         Invoke(nameof(DeactiveAttack), 0.5f);
     }
 
-    public bool IsTargetInRange()
+/*    public bool IsTargetInRange()
     {
         if (target != null && Vector3.Distance(transform.position, target.transform.position) <= attackRange)
             return true;
 
         return false;
-    }
+    }*/
 
     public void ChangeState(IState newState)
     {
@@ -128,11 +128,11 @@ public class Enemy : Character
 
     private void ActiveAttack()
     {
-        attackArea.SetActive(true);
+        //attackArea.SetActive(true);
     }
 
     private void DeactiveAttack()
     {
-        attackArea.SetActive(false);
+        //attackArea.SetActive(false);
     }
 }

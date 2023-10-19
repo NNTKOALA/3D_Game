@@ -9,6 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5580082133288396816}
+  - component: {fileID: 8226069925087661404}
+  - component: {fileID: 514103741677689508}
+  - component: {fileID: 2071021019530115456}
   m_Layer: 0
   m_Name: Chest_Monster
   m_TagString: Untagged
@@ -25,13 +28,58 @@ Transform:
   m_GameObject: {fileID: 5580082133288396819}
   m_LocalRotation: {x: 0, y: -0.9659258, z: 0, w: 0.2588191}
   m_LocalPosition: {x: 11, y: 6.2, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6033957294827607869}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -150, z: 0}
+--- !u!54 &8226069925087661404
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5580082133288396819}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0
+--- !u!136 &514103741677689508
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5580082133288396819}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2071021019530115456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5580082133288396819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8c0470790db08498ee9ad2f0420c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 6033957294835071193}
+  moveSpeed: 0
+  rb: {fileID: 8226069925087661404}
 --- !u!1001 &5580082132508256696
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104,5 +152,10 @@ PrefabInstance:
 --- !u!4 &6033957294827607869 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2219292830553816709, guid: 6a4317fc729846d79f69cda980e03f9d, type: 3}
+  m_PrefabInstance: {fileID: 5580082132508256696}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6033957294835071193 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2219292830544548193, guid: 6a4317fc729846d79f69cda980e03f9d, type: 3}
   m_PrefabInstance: {fileID: 5580082132508256696}
   m_PrefabAsset: {fileID: 0}

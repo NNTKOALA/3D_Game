@@ -48,7 +48,7 @@ public class Character : MonoBehaviour
         }
     }
 
-/*    public void OnHit(float damage)
+    public void OnHit(float damage)
     {
         if (!IsDeath)
         {
@@ -60,11 +60,11 @@ public class Character : MonoBehaviour
                 OnDeath();
             }
 
-            healthBar.SetNewHealth(health);
+            //healthBar.SetNewHealth(health);
 
-            GameObject text = Instantiate(combatTextPrefab, transform.position + Vector3.up, Quaternion.identity);
-            text.GetComponent<CombatText>().OnInit(damage);
+/*            GameObject text = Instantiate(combatTextPrefab, transform.position + Vector3.up, Quaternion.identity);
+            text.GetComponent<CombatText>().OnInit(damage);*/
         }
-    }*/
+    }
 
 }

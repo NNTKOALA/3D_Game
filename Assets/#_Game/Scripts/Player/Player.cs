@@ -101,7 +101,7 @@ public class Player : Character
         //Moving
         if (Mathf.Abs(horizontal) > 0.1f)
         {
-            rb.velocity = new Vector3(horizontal * Time.fixedDeltaTime * moveSpeed, rb.velocity.y, 0);
+            rb.velocity = new Vector3(horizontal * moveSpeed, rb.velocity.y, 0);
             transform.rotation = Quaternion.Euler(new Vector3(0, horizontal > 0 ? 90 : -90, 0));
             isMoving = true;
 

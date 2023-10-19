@@ -19,11 +19,11 @@ public class PatrolState : IState
         {
             enemy.ChangeDirection(enemy.Target.transform.position.x > enemy.transform.position.x);
 
-            if (enemy.IsTargetInRange())
+/*            if (enemy.IsTargetInRange())
             {
                 enemy.ChangeState(new AttackState());
                 return;
-            }
+            }*/
         }
 
         enemy.Moving();
