@@ -42,9 +42,12 @@ public class Character : MonoBehaviour
     {
         if (currentAnim != animName)
         {
-            anim.ResetTrigger(currentAnim);
-            currentAnim = animName;
-            anim.SetTrigger(currentAnim);
+            if (currentAnim != null)
+            {
+                anim.ResetTrigger(currentAnim);
+                currentAnim = animName;
+                anim.SetTrigger(currentAnim);
+            }
         }
     }
 
@@ -62,8 +65,8 @@ public class Character : MonoBehaviour
 
             //healthBar.SetNewHealth(health);
 
-/*            GameObject text = Instantiate(combatTextPrefab, transform.position + Vector3.up, Quaternion.identity);
-            text.GetComponent<CombatText>().OnInit(damage);*/
+            /*            GameObject text = Instantiate(combatTextPrefab, transform.position + Vector3.up, Quaternion.identity);
+                        text.GetComponent<CombatText>().OnInit(damage);*/
         }
     }
 

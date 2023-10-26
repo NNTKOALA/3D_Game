@@ -16,6 +16,9 @@ public class Enemy : Character
     private bool isRight;
     private Character target;
 
+    [SerializeField] int currentHealth;
+    [SerializeField] int maxHealth;
+
     public Character Target
     {
         get => target;
@@ -23,18 +26,18 @@ public class Enemy : Character
         {
             target = value;
 
-/*            if (IsTargetInRange())
-            {
-                ChangeState(new AttackState());
-            }
-            else if (target != null)
-            {
-                ChangeState(new PatrolState());
-            }
-            else
-            {
-                ChangeState(new IdleState());
-            }*/
+            /*            if (IsTargetInRange())
+                        {
+                            ChangeState(new AttackState());
+                        }
+                        else if (target != null)
+                        {
+                            ChangeState(new PatrolState());
+                        }
+                        else
+                        {
+                            ChangeState(new IdleState());
+                        }*/
         }
     }
 
@@ -49,6 +52,8 @@ public class Enemy : Character
     public override void OnInit()
     {
         base.OnInit();
+
+        currentHealth = maxHealth;
 
         ChangeState(new IdleState());
         isRight = true;
@@ -89,13 +94,30 @@ public class Enemy : Character
         Invoke(nameof(DeactiveAttack), 0.5f);
     }
 
-/*    public bool IsTargetInRange()
+    public void TakeDamage(int damage)
     {
-        if (target != null && Vector3.Distance(transform.position, target.transform.position) <= attackRange)
-            return true;
+        if (currentHealth > 0)
+        {
+            currentHealth -= damage;
 
-        return false;
-    }*/
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+                Debug.Log("EnemyDie");
+
+            Destroy(gameObject);
+                //Die State
+            }
+        }
+    }
+
+    /*    public bool IsTargetInRange()
+        {
+            if (target != null && Vector3.Distance(transform.position, target.transform.position) <= attackRange)
+                return true;
+
+            return false;
+        }*/
 
     public void ChangeState(IState newState)
     {

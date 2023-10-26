@@ -8,6 +8,7 @@ public class Player : Character
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float jumpForce = 400f;
     [SerializeField] float moveSpeed = 50f;
+    [SerializeField] GameObject attackBoxCol;
 
     //[SerializeField] Transform spawnPoint;
     //[SerializeField] GameObject attackArea;

@@ -9,6 +9,8 @@ public class HeroController : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private float speed = 10;
     [SerializeField] private float jumpForce = 350;
+    [SerializeField] GameObject attackBoxCol;
+    [SerializeField] AttackBox attackBox;
 
     private bool isGrounded = true;
     private bool isJumping = false;
@@ -22,9 +24,11 @@ public class HeroController : MonoBehaviour
 
     private string currentAnimName;
     // Start is called before the first frame update
-    void Start()
+
+    private void OnEnable()
     {
-        
+        this.gameObject.transform.position = LevelManager.Ins.startPoint.position;
+
     }
 
     // Update is called once per frame
@@ -61,7 +65,7 @@ public class HeroController : MonoBehaviour
         if (isGrounded)
         {
             isJumping = false;
-            
+
         }
 
         //Moving
@@ -70,7 +74,7 @@ public class HeroController : MonoBehaviour
             rb.velocity = new Vector3(horizontal * speed, rb.velocity.y, 0);
             transform.rotation = Quaternion.Euler(new Vector3(0, horizontal > 0 ? 90 : -90, 0));
             isMoving = true;
-            
+
             //transform.localScale = new Vector3(horizontal, 1, 1);
         }
         else if (isGrounded)
@@ -86,11 +90,14 @@ public class HeroController : MonoBehaviour
     {
         if (currentAnimName != animName)
         {
-            anim.ResetTrigger(currentAnimName);
+            if (currentAnimName != null)
+            {
+                anim.ResetTrigger(currentAnimName);
 
-            currentAnimName = animName;
+                currentAnimName = animName;
 
-            anim.SetTrigger(currentAnimName);
+                anim.SetTrigger(currentAnimName);
+            }
         }
     }
 
@@ -105,7 +112,7 @@ public class HeroController : MonoBehaviour
 
     private void SetIdle()
     {
-        ChangeAnim("idle");   
+        ChangeAnim("idle");
     }
 
     private void Jump()
@@ -119,6 +126,7 @@ public class HeroController : MonoBehaviour
     {
         rb.velocity = Vector2.zero;
         ChangeAnim("attack1");
+        attackBoxCol.gameObject.SetActive(true);
         isAttack = true;
         Invoke(nameof(ResetAttack), 0.5f);
     }
@@ -126,6 +134,8 @@ public class HeroController : MonoBehaviour
     private void ResetAttack()
     {
         ChangeAnim("idle");
+        attackBoxCol.gameObject.SetActive(false);
+
         isAttack = false;
     }
 

@@ -31,7 +31,7 @@ public class MovingGround : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, target.position, Time.fixedDeltaTime * moveSpeed);
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
@@ -39,7 +39,7 @@ public class MovingGround : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider collision)
+    private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
