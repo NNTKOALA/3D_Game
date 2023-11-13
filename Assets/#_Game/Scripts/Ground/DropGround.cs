@@ -5,7 +5,7 @@ using UnityEngine;
 public class DropGround : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
-    [SerializeField] BoxCollider collider;
+    [SerializeField] BoxCollider boxcollider;
 
     Vector3 startPoint;
 
@@ -35,7 +35,7 @@ public class DropGround : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<Rigidbody>().velocity.y <= 0.05f)
         {
-            Invoke(nameof(Drop), 0.5f);
+            Invoke(nameof(Drop), 1f);
         }
     }
 }

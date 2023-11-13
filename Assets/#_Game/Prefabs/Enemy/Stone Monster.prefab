@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 2824846606551053159}
   - component: {fileID: 2824846606551053157}
   - component: {fileID: 2824846606551053156}
+  - component: {fileID: -419759957781179989}
   m_Layer: 0
   m_Name: Stone Monster
-  m_TagString: Untagged
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,8 +63,26 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 88
   m_CollisionDetection: 0
+--- !u!114 &-419759957781179989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2824846606551053158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8c0470790db08498ee9ad2f0420c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 2824846607601087705}
+  maxHealth: 50
+  moveSpeed: 10
+  rb: {fileID: 2824846606551053156}
+  damage: 20
+  currentHealth: 50
 --- !u!1001 &1417971601806916307
 PrefabInstance:
   m_ObjectHideFlags: 0

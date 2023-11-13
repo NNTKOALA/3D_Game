@@ -11,13 +11,16 @@ public class Enemy : Character
     [SerializeField] float moveSpeed;
     [SerializeField] Rigidbody rb;
     //[SerializeField] GameObject attackArea;
+    [SerializeField] float damage = 10f;
+    [SerializeField] int currentHealth;
+
+    public int point;
+    public float Damage => damage;
 
     private IState currentState;
     private bool isRight;
     private Character target;
 
-    [SerializeField] int currentHealth;
-    [SerializeField] int maxHealth;
 
     public Character Target
     {
@@ -26,18 +29,18 @@ public class Enemy : Character
         {
             target = value;
 
-            /*            if (IsTargetInRange())
-                        {
-                            ChangeState(new AttackState());
-                        }
-                        else if (target != null)
-                        {
-                            ChangeState(new PatrolState());
-                        }
-                        else
-                        {
-                            ChangeState(new IdleState());
-                        }*/
+/*            if (IsTargetInRange())
+            {
+                ChangeState(new AttackState());
+            }
+            else if (target != null)
+            {
+                ChangeState(new PatrolState());
+            }
+            else
+            {
+                ChangeState(new IdleState());
+            }*/
         }
     }
 
@@ -53,10 +56,11 @@ public class Enemy : Character
     {
         base.OnInit();
 
-        currentHealth = maxHealth;
-
+        currentHealth = Mathf.RoundToInt(maxHealth);
+        point = currentHealth;
         ChangeState(new IdleState());
         isRight = true;
+        Debug.Log("OnInit");
     }
 
     public override void OnDespawn()
@@ -74,20 +78,23 @@ public class Enemy : Character
 
     public void Moving()
     {
-        ChangeAnim("run");
+        //ChangeAnim("run");
+        anim.SetBool("isMoving", true);
 
-        rb.velocity = transform.right * moveSpeed;
+        rb.velocity = (isRight ? 1 : -1) * Vector3.right * moveSpeed;
     }
 
     public void StopMoving()
     {
-        ChangeAnim("idle");
+        anim.SetBool("isMoving", false);
+        //ChangeAnim("idle");
 
         rb.velocity = Vector3.zero;
     }
 
     public void Attack()
     {
+        StopMoving();
         ChangeAnim("attack");
         ActiveAttack();
 
@@ -99,16 +106,27 @@ public class Enemy : Character
         if (currentHealth > 0)
         {
             currentHealth -= damage;
+            ChangeAnim("hit");
 
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
                 Debug.Log("EnemyDie");
-
-            Destroy(gameObject);
                 //Die State
+                //Goi anim die
+                ChangeAnim("die");
+                StartCoroutine(DestroyEnemy());
+                GameManager.Instance.point += point;
+                UIManager.Instance.UpdatePoint();
+
             }
         }
+    }
+
+    IEnumerator DestroyEnemy()
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject);
     }
 
     /*    public bool IsTargetInRange()
@@ -138,6 +156,7 @@ public class Enemy : Character
         if (collision.gameObject.CompareTag("EnemyWall"))
         {
             ChangeDirection(!isRight);
+            Debug.Log("Hit wall");
         }
     }
 
@@ -145,16 +164,17 @@ public class Enemy : Character
     {
         this.isRight = isRight;
 
-        transform.rotation = isRight ? Quaternion.Euler(0, 0, 0) : Quaternion.Euler(0, 180, 0);
+        transform.rotation = isRight ? Quaternion.Euler(0, 90, 0) : Quaternion.Euler(0, 270, 0);
     }
 
     private void ActiveAttack()
     {
-        //attackArea.SetActive(true);
+
     }
 
     private void DeactiveAttack()
     {
-        //attackArea.SetActive(false);
+        ChangeAnim("");
+        Target = null;
     }
 }

@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3892343977273586335}
   - component: {fileID: 3892343977273586333}
   - component: {fileID: 3892343977273586334}
+  - component: {fileID: 1770090724964048757}
   m_Layer: 0
   m_Name: Bat Monster
-  m_TagString: Untagged
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,6 +65,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1770090724964048757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3892343977273586328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8c0470790db08498ee9ad2f0420c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 187489360778215941}
+  maxHealth: 5
+  moveSpeed: 0
+  rb: {fileID: 3892343977273586334}
+  damage: 10
+  currentHealth: 5
 --- !u!1001 &187489360785520485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129,6 +148,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 6e89b9b30bff9b84d9c5569b5065d463, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 389bf68e76b0b4a46a72c2d48aa1b9da, type: 3}
+--- !u!95 &187489360778215941 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 389bf68e76b0b4a46a72c2d48aa1b9da, type: 3}
+  m_PrefabInstance: {fileID: 187489360785520485}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &187489360785911277 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400008, guid: 389bf68e76b0b4a46a72c2d48aa1b9da, type: 3}

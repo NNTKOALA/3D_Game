@@ -9,9 +9,10 @@ public class Player : Character
     [SerializeField] float jumpForce = 400f;
     [SerializeField] float moveSpeed = 50f;
     [SerializeField] GameObject attackBoxCol;
+    [SerializeField] HealthBar healthBar;
 
     //[SerializeField] Transform spawnPoint;
-    //[SerializeField] GameObject attackArea;
+    [SerializeField] GameObject attackArea;
 
     private Rigidbody rb;
     private Vector3 moveVector = new Vector3();
@@ -25,7 +26,7 @@ public class Player : Character
     private bool isJumping = false;
     private bool isAttack = false;
     private bool isMoving = false;
-    private bool isDead = false;
+    private bool isDeath = false;
 
     //private int coin = 0;
 
@@ -44,8 +45,9 @@ public class Player : Character
     {
         base.OnInit();
 
-        isDead = false;
+        isDeath = false;
         isAttack = false;
+        healthBar.OnInit(maxHealth);
 
         transform.position = savePoint;
         ChangeAnim("idle");
@@ -61,18 +63,29 @@ public class Player : Character
 
     private void FixedUpdate()
     {
-        if (isDead) return;
+        if (isDeath) return;
+
+        isGrounded = CheckOnGround();
 
         horizontal = Input.GetAxisRaw("Horizontal");
-        isGrounded = CheckOnGround();
+        //vertical = Input.GetAxisRaw("vertical");
+
+
+        //check falling
+        if (isGrounded)
+        {
+            isJumping = false;
+
+        }
 
         if (isGrounded)
         {
-            if (isAttack || isJumping)
+            if (isJumping)
             {
                 return;
             }
 
+            //Jump
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
                 Jump();
@@ -84,18 +97,6 @@ public class Player : Character
             else if (Input.GetKeyDown(KeyCode.E) && isGrounded)
             {
                 SpeacialAttack();
-            }
-        }
-        else
-        {
-            if (isPressAttack)
-            {
-                isPressAttack = false;
-            }
-
-            if (rb.velocity.y < 0.1f)
-            {
-                isJumping = false;
             }
         }
 
@@ -115,6 +116,7 @@ public class Player : Character
         }
         anim.SetBool("isMoving", isMoving);
         currentAnim = isMoving ? "move" : "idle";
+
     }
 
 
@@ -130,8 +132,8 @@ public class Player : Character
         isAttack = true;
         ChangeAnim("attack1");
 
-/*        ActiveAttack();
-        Invoke(nameof(DeactiveAttack), 0.5f);*/
+        ActiveAttack();
+        Invoke(nameof(DeactiveAttack), 0.5f);
     }
 
     private void SpeacialAttack()
@@ -153,40 +155,44 @@ public class Player : Character
     protected override void OnDeath()
     {
         base.OnDeath();
-        isDead = true;
+        isDeath = true;
+        OnDead();
     }
 
     private bool CheckOnGround()
     {
+        Debug.DrawLine(transform.position, transform.position + Vector3.down * 0.2f, Color.red);
+
         RaycastHit hit;
 
         return Physics.Raycast(transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 0.4f, groundLayer);
     }
 
-/*    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Coin"))
+        /*        if (collision.gameObject.CompareTag("Coin"))
         {
             coin++;
             UIManager.Instance.SetCoinText(coin);
             Destroy(collision.gameObject);
-        }
+        }*/
 
         if (collision.gameObject.CompareTag("DeathZone"))
         {
             OnDeath();
         }
-    }*/
+    }
 
-/*    private void ActiveAttack()
+
+    private void ActiveAttack()
     {
         attackArea.SetActive(true);
-    }*/
+    }
 
-/*    private void DeactiveAttack()
+    private void DeactiveAttack()
     {
         attackArea.SetActive(false);
-    }*/
+    }
 
     public void ResetAttack()
     {
@@ -202,5 +208,23 @@ public class Player : Character
     public void SetMove(float horizontal)
     {
         moveVector.x = horizontal;
+    }
+
+    public override void OnHit(float damage)
+    {
+        base.OnHit(damage);
+
+        healthBar.SetNewHealth(health);
+    }
+
+    public override void OnNewGame()
+    {
+        base.OnNewGame();
+        transform.position = savePoint;
+    }
+
+    public override void OnDead()
+    {
+        UIManager.Instance.SwitchToLosePanel();
     }
 }

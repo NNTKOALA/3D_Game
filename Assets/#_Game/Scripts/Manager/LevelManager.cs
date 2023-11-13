@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
 
     public GameObject[] levelPrefabs;
     public Transform startPoint;
-    public HeroController player;
+    public Player player;
 
     //public int currentLevel;
 
@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        StartPoin();
+        StartPoint();
     }
 
     public void SpawnLevel(int id)
@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    public void StartPoin()
+    public void StartPoint()
     {
         startPoint = levelPrefabs[1].GetComponent<LevelGame>().startPoint;
         player.gameObject.SetActive(true);

@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 4402430428738716879}
   - component: {fileID: 4402430428738716877}
   - component: {fileID: 4402430428738716878}
+  - component: {fileID: -6829602611330978617}
   m_Layer: 0
   m_Name: Mummy Monster
-  m_TagString: Untagged
+  m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,8 +63,26 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 88
   m_CollisionDetection: 0
+--- !u!114 &-6829602611330978617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4402430428738716872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8c0470790db08498ee9ad2f0420c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 686492778009500882}
+  maxHealth: 15
+  moveSpeed: 5
+  rb: {fileID: 4402430428738716878}
+  damage: 10
+  currentHealth: 15
 --- !u!1001 &686492778018924978
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -137,6 +156,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 30a9f5c8ac6483249a92e09c302f96f9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3353e4f866c39d043a315b41717c9bb7, type: 3}
+--- !u!95 &686492778009500882 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 3353e4f866c39d043a315b41717c9bb7, type: 3}
+  m_PrefabInstance: {fileID: 686492778018924978}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &686492778019320692 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400070, guid: 3353e4f866c39d043a315b41717c9bb7, type: 3}
