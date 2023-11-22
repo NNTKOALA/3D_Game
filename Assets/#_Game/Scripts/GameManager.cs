@@ -7,10 +7,13 @@ using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
+    public const string PREF_MAX_LEVEL = "max_level";
+
     public static GameManager Instance { get; private set; }
-    public List<GameObject> levelPrefab;
+    public List<LevelGame> mainLevelPrefab;
+    public List<LevelGame> questLevelPrefab;
     public int currentLevel;
-    private GameObject currentLevelInstance;
+    private LevelGame currentLevelInstance;
 
     public int point;
 
@@ -28,10 +31,10 @@ public class GameManager : MonoBehaviour
     private string playerName;
     public string PlayerName => playerName;
 
-    public void SetPlayerName(string newName)
-    {
-        playerName = newName;
-    }
+    //public void SetPlayerName(string newName)
+    //{
+    //    playerName = newName;
+    //}
 
     private void Awake()
     {
@@ -48,7 +51,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         currentLevel = 0;
-        currentLevelInstance = Instantiate(levelPrefab[currentLevel]);
+        player.Rb.isKinematic = true;
+        //currentLevelInstance = Instantiate(levelPrefab[currentLevel]);
+        //player.transform.position = currentLevelInstance.startPoint.position;
         PauseGame();
         QualitySettings.vSyncCount = 1;
         Application.targetFrameRate = -1;
@@ -66,6 +71,12 @@ public class GameManager : MonoBehaviour
         ResumeGame();
         player.gameObject.SetActive(true);
         player.OnNewGame();
+        player.Rb.isKinematic = false;
+    }
+
+    public void ResetSavePoint()
+    {
+        player.SetSavePoint(currentLevelInstance.startPoint.position);
     }
 
 
@@ -89,11 +100,47 @@ public class GameManager : MonoBehaviour
     public void NextLevel()
     {
         Debug.Log("Next Level");
-        currentLevel = ++currentLevel % levelPrefab.Count;
-        Destroy(currentLevelInstance);
-        currentLevelInstance = Instantiate(levelPrefab[currentLevel]);
+        currentLevel = ++currentLevel % mainLevelPrefab.Count;
+
+        int maxLevel = PlayerPrefs.GetInt(PREF_MAX_LEVEL, 0);
+        if(currentLevel > maxLevel)
+        {
+            PlayerPrefs.SetInt(PREF_MAX_LEVEL, currentLevel);
+        }
+
+        Destroy(currentLevelInstance.gameObject);
+        currentLevelInstance = Instantiate(mainLevelPrefab[currentLevel]);
+        ResetSavePoint();
+        player.transform.position = currentLevelInstance.startPoint.position;
         StartNewGame();
         UIManager.Instance.SwitchToIngameUI();
     }
 
+    public void SpawnLevelById(int id)
+    {
+        currentLevel = id;
+        if(currentLevelInstance != null)
+        {
+            Destroy(currentLevelInstance.gameObject);
+        }
+        currentLevelInstance = Instantiate(mainLevelPrefab[currentLevel]);
+        player.transform.position = currentLevelInstance.startPoint.position;
+        ResetSavePoint();
+        StartNewGame();
+        UIManager.Instance.SwitchToIngameUI();
+    }
+
+    public void SpawnQuestLevel()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, questLevelPrefab.Count);
+        if (currentLevelInstance != null)
+        {
+            Destroy(currentLevelInstance.gameObject);
+        }
+        currentLevelInstance = Instantiate(questLevelPrefab[randomIndex]);
+        player.transform.position = currentLevelInstance.startPoint.position;
+        ResetSavePoint();
+        StartNewGame();
+        UIManager.Instance.SwitchToIngameUI();
+    }
 }

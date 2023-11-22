@@ -26,10 +26,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2446849307679398856}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 46.989998, y: -6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1543202873768621657}
   - {fileID: 1338607209032284659}
@@ -47,10 +47,10 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 88
   m_CollisionDetection: 0
 --- !u!136 &2446849307679398858
 CapsuleCollider:
@@ -60,7 +60,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2446849307679398856}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 1.5
@@ -78,13 +78,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8c0470790db08498ee9ad2f0420c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
+  anim: {fileID: 1543202873775610281}
   maxHealth: 100
-  moveSpeed: 20
+  moveSpeed: 5
   rb: {fileID: 2446849307679398859}
-  damage: 100
+  damage: 80
   currentHealth: 100
-  point: 0
+  point: 200
 --- !u!1 &6434736261075321697
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,5 +260,10 @@ PrefabInstance:
 --- !u!4 &1543202873768621657 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400016, guid: 75bf79f8876829a44bb388ccd90400a7, type: 3}
+  m_PrefabInstance: {fileID: 1543202873768225993}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1543202873775610281 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 75bf79f8876829a44bb388ccd90400a7, type: 3}
   m_PrefabInstance: {fileID: 1543202873768225993}
   m_PrefabAsset: {fileID: 0}

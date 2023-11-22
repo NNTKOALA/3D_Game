@@ -19,13 +19,12 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        StartPoint();
+        //StartPoint();
     }
 
     public void SpawnLevel(int id)
     {
-        Instantiate(levelPrefabs[id].gameObject);
-        
+        GameManager.Instance.SpawnLevelById(id);      
     }
 
     public void StartPoint()

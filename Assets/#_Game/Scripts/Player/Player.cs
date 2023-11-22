@@ -15,6 +15,7 @@ public class Player : Character
     [SerializeField] GameObject attackArea;
 
     private Rigidbody rb;
+    public Rigidbody Rb => rb;
     private Vector3 moveVector = new Vector3();
 
     private float horizontal;
@@ -26,14 +27,13 @@ public class Player : Character
     private bool isJumping = false;
     private bool isAttack = false;
     private bool isMoving = false;
-    private bool isDeath = false;
 
     //private int coin = 0;
 
     private Vector3 savePoint;
 
     private void Awake()
-    {
+    {       
         rb = GetComponent<Rigidbody>();
         SetSavePoint(transform.position);
 
@@ -45,7 +45,7 @@ public class Player : Character
     {
         base.OnInit();
 
-        isDeath = false;
+        isDead = false;
         isAttack = false;
         healthBar.OnInit(maxHealth);
 
@@ -63,7 +63,7 @@ public class Player : Character
 
     private void FixedUpdate()
     {
-        if (isDeath) return;
+        if (isDead) return;
 
         isGrounded = CheckOnGround();
 
@@ -155,8 +155,8 @@ public class Player : Character
     protected override void OnDeath()
     {
         base.OnDeath();
-        isDeath = true;
-        OnDead();
+        isDead = true;
+        UIManager.Instance.SwitchToLosePanel();
     }
 
     private bool CheckOnGround()
@@ -165,7 +165,7 @@ public class Player : Character
 
         RaycastHit hit;
 
-        return Physics.Raycast(transform.position + Vector3.up * 0.2f, Vector3.down, out hit, 0.4f, groundLayer);
+        return Physics.Raycast(transform.position + Vector3.up * 0.2f, Vector3.down * 2f, out hit, 0.4f, groundLayer);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -176,6 +176,8 @@ public class Player : Character
             UIManager.Instance.SetCoinText(coin);
             Destroy(collision.gameObject);
         }*/
+
+        if(isDead) return;
 
         if (collision.gameObject.CompareTag("DeathZone"))
         {
@@ -220,11 +222,7 @@ public class Player : Character
     public override void OnNewGame()
     {
         base.OnNewGame();
+        isDead = false;
         transform.position = savePoint;
-    }
-
-    public override void OnDead()
-    {
-        UIManager.Instance.SwitchToLosePanel();
     }
 }

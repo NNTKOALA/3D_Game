@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpinningReward : MonoBehaviour
 {
     public float speed = 50f;
+    public int point;
 
     void Update()
     {
@@ -14,9 +15,10 @@ public class SpinningReward : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.tag == "Player")
-        {
-            //collision.GetComponent<Player>().AddStrawBerry();
+        {           
             Destroy(gameObject);
+            GameManager.Instance.point += point;
+            UIManager.Instance.UpdatePoint();
         }
     }
 }

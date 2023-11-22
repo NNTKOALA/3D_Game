@@ -143,6 +143,7 @@ MonoBehaviour:
   rb: {fileID: 7540486484491297739}
   damage: 10
   currentHealth: 15
+  point: 15
 --- !u!1001 &8312709463073639760
 PrefabInstance:
   m_ObjectHideFlags: 0

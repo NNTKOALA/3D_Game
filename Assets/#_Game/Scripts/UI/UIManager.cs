@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -14,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject levelmanagerPanel;
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject losePanel;
+    [SerializeField] GameObject loadingPanel;
     [SerializeField] TextMeshProUGUI pointCount;
 
 
@@ -29,16 +31,31 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void LoadingSceneCoroutine(float delay)
+    {
+        StartCoroutine(LoadingRoutine(delay));
+    }
+
+    private IEnumerator LoadingRoutine(float delay)
+    {
+        loadingPanel.SetActive(true);
+        GameManager.Instance.SpawnQuestLevel();
+
+        yield return new WaitForSeconds(delay);
+
+        loadingPanel.SetActive(false);
+    }
+
     public void Start()
     {
 
         SwitchToMainMenuUI();
     }
 
-    public void SetPlayerName(string playerName)
-    {
-        GameManager.Instance.SetPlayerName(playerName);
-    }
+    //public void SetPlayerName(string playerName)
+    //{
+    //    GameManager.Instance.SetPlayerName(playerName);
+    //}
 
     public void ResetGame()
     {
@@ -108,4 +125,8 @@ public class UIManager : MonoBehaviour
         SwitchTo(losePanel);
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

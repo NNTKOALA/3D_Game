@@ -37,7 +37,8 @@ public class Character : MonoBehaviour
     protected virtual void OnDeath()
     {
         ChangeAnim("die");
-        Invoke(nameof(OnDespawn), 5f);
+        Invoke(nameof(OnDespawn), 1f);
+        isDead = true;
     }
 
     protected void ChangeAnim(string animName)
@@ -81,11 +82,6 @@ public class Character : MonoBehaviour
     public virtual void OnNewGame()
     {
 
-    }
-
-    public virtual void OnDead()
-    {
-        isDead = true;
     }
 
 }
