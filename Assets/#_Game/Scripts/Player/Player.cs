@@ -94,10 +94,6 @@ public class Player : Character
             {
                 Attack();
             }
-            else if (Input.GetKeyDown(KeyCode.E) && isGrounded)
-            {
-                SpeacialAttack();
-            }
         }
 
         //Moving
@@ -134,14 +130,6 @@ public class Player : Character
 
         ActiveAttack();
         Invoke(nameof(DeactiveAttack), 0.5f);
-    }
-
-    private void SpeacialAttack()
-    {
-        rb.velocity = Vector3.zero;
-        ChangeAnim("attack4");
-        isAttack = true;
-        Invoke(nameof(ResetAttack), 0.5f);
     }
 
     private void Jump()

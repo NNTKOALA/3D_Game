@@ -122,10 +122,10 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401226671749765592}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 807456cbeb652c74eabd18df6f22fe9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1401226671749765598}
-  collider: {fileID: 1401226671749765597}
+  boxcollider: {fileID: 1401226671749765597}
