@@ -71,11 +71,6 @@ public class Character : MonoBehaviour
                 health = 0;
                 OnDeath();
             }
-
-            //healthBar.SetNewHealth(health);
-
-            /*            GameObject text = Instantiate(combatTextPrefab, transform.position + Vector3.up, Quaternion.identity);
-                        text.GetComponent<CombatText>().OnInit(damage);*/
         }
     }
 

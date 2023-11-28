@@ -17,11 +17,7 @@ public class GameManager : MonoBehaviour
 
     public int point;
 
-
-    [SerializeField] int initialAmountEnemy = 5;
     [SerializeField] float spawnCooldown = 5f;
-    [SerializeField] int maxAmountPerSpawn = 8;
-    [SerializeField] int minAmountPerSpawn = 3;
     [SerializeField] Player player;
     public Player MainPlayer => player;
 
@@ -30,11 +26,6 @@ public class GameManager : MonoBehaviour
 
     private string playerName;
     public string PlayerName => playerName;
-
-    //public void SetPlayerName(string newName)
-    //{
-    //    playerName = newName;
-    //}
 
     private void Awake()
     {

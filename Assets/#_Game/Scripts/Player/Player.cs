@@ -160,13 +160,6 @@ public class Player : Character
 
     private void OnCollisionEnter(Collision collision)
     {
-        /*        if (collision.gameObject.CompareTag("Coin"))
-        {
-            coin++;
-            UIManager.Instance.SetCoinText(coin);
-            Destroy(collision.gameObject);
-        }*/
-
         if(isDead) return;
 
         if (collision.gameObject.CompareTag("DeathZone"))

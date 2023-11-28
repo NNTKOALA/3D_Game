@@ -54,11 +54,6 @@ public class UIManager : MonoBehaviour
         SwitchToMainMenuUI();
     }
 
-    //public void SetPlayerName(string playerName)
-    //{
-    //    GameManager.Instance.SetPlayerName(playerName);
-    //}
-
     public void ResetGame()
     {
         
