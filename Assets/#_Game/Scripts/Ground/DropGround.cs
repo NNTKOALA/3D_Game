@@ -15,12 +15,14 @@ public class DropGround : MonoBehaviour
     {
         startPoint = transform.position;
         rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeAll;
         isFalling = false;
     }
 
     private void Drop()
     {
         rb.useGravity = true;
+        rb.constraints = RigidbodyConstraints.None;
         isFalling = true;
         Invoke(nameof(OnReset), 3f);
     }
@@ -28,6 +30,8 @@ public class DropGround : MonoBehaviour
     private void OnReset()
     {
         transform.position = startPoint;
+        rb.useGravity = false;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
         isFalling = false;
     }
 

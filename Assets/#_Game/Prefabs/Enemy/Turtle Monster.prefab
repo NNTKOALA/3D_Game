@@ -194,7 +194,7 @@ MonoBehaviour:
   moveSpeed: 5
   rb: {fileID: 2013181784702708219}
   damage: 15
-  currentHealth: 50
+  currentHealth: 30
   point: 50
 --- !u!1001 &3417731322117897430
 PrefabInstance:

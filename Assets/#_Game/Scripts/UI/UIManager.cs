@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject losePanel;
     [SerializeField] GameObject loadingPanel;
+    [SerializeField] GameObject settingPanel;
+    [SerializeField] GameObject infoPanel;
     [SerializeField] TextMeshProUGUI pointCount;
 
 
@@ -77,6 +79,9 @@ public class UIManager : MonoBehaviour
         levelmanagerPanel.SetActive(false);
         winPanel.SetActive(false);
         losePanel.SetActive(false);
+        loadingPanel.SetActive(false);
+        settingPanel.SetActive(false);
+        infoPanel.SetActive(false);
     }
 
     public void SwitchTo(GameObject ui)
@@ -88,6 +93,7 @@ public class UIManager : MonoBehaviour
     public void SwitchToMainMenuUI()
     {
         SwitchTo(menuPanel);
+        SoundManager.Instance.PlayMenuSound();
 
     }
     public void UpdatePoint()
@@ -123,6 +129,19 @@ public class UIManager : MonoBehaviour
     public void SwitchToLosePanel()
     {
         SwitchTo(losePanel);
+    }
+
+    public void SwitchToLoadingPanel()
+    {
+        SwitchTo(loadingPanel);
+    }
+    public void SwitchToSettingPanel()
+    {
+        SwitchTo(settingPanel);
+    }
+    public void SwitchToInfoPanel()
+    {
+        SwitchTo(infoPanel);
     }
 
     public void QuitGame()

@@ -2004,6 +2004,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1105128346969412079, guid: 455dceb92ecb34244bf7c941e7a7cc95, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4111297650081710583, guid: 455dceb92ecb34244bf7c941e7a7cc95, type: 3}
       propertyPath: m_Name
       value: Check Point (1)
@@ -2148,6 +2152,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1105128346969412079, guid: 455dceb92ecb34244bf7c941e7a7cc95, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4111297650081710583, guid: 455dceb92ecb34244bf7c941e7a7cc95, type: 3}
       propertyPath: m_Name
       value: Check Point
@@ -2275,10 +2283,6 @@ PrefabInstance:
     - target: {fileID: 1401226671749765592, guid: c5649c299597b0b40a4f464abb5126db, type: 3}
       propertyPath: m_Name
       value: DropGround
-      objectReference: {fileID: 0}
-    - target: {fileID: 1401226671749765598, guid: c5649c299597b0b40a4f464abb5126db, type: 3}
-      propertyPath: m_Constraints
-      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1401226671749765602, guid: c5649c299597b0b40a4f464abb5126db, type: 3}
       propertyPath: m_RootOrder

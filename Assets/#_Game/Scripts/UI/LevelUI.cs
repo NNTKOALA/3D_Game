@@ -31,6 +31,8 @@ public class LevelUI : MonoBehaviour
         GameManager.Instance.ResetSavePoint();
         GameManager.Instance.StartNewGame();
 
+        SoundManager.Instance.PlayIngameSound();
+
         gameObject.SetActive(false);
     }
 }

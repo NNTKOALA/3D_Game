@@ -89,10 +89,12 @@ public class Player : Character
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
                 Jump();
+                SoundManager.Instance.PlayClickedSound();
             }
             else if (Input.GetMouseButtonDown(0) && isGrounded)
             {
                 Attack();
+                SoundManager.Instance.PlayClickedSound();
             }
         }
 
@@ -203,6 +205,14 @@ public class Player : Character
     public override void OnHit(float damage)
     {
         base.OnHit(damage);
+
+        healthBar.SetNewHealth(health);
+    }
+
+    public void OnHealing(float healthAmt)
+    {
+        health += healthAmt;
+        health = Mathf.Clamp(health, 0, maxHealth);
 
         healthBar.SetNewHealth(health);
     }

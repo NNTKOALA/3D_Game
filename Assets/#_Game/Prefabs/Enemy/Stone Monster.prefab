@@ -139,10 +139,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 2824846607601087705}
   maxHealth: 50
-  moveSpeed: 10
+  moveSpeed: 5
   rb: {fileID: 2824846606551053156}
   damage: 20
-  currentHealth: 50
+  currentHealth: 30
   point: 50
 --- !u!1001 &1417971601806916307
 PrefabInstance:

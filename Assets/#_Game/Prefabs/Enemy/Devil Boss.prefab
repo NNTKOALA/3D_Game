@@ -82,7 +82,7 @@ MonoBehaviour:
   maxHealth: 100
   moveSpeed: 5
   rb: {fileID: 2446849307679398859}
-  damage: 80
+  damage: 50
   currentHealth: 100
   point: 200
 --- !u!1 &6434736261075321697
